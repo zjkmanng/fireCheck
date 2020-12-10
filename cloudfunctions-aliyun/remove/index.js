@@ -1,19 +1,12 @@
 'use strict';
 const db = uniCloud.database()
 exports.main = async (event, context) => {
-	const collection = db.collection('user')
-	const docList = await collection.limit(1).get()
-	if (!docList.data || docList.data.length === 0) {
-		return {
-			status: -1,
-			msg: '没有数据'
-		}
-	}
-	const res = await collection.doc(docList.data[0]._id).remove()
+	const collection = db.collection('fire')
+	const res = await collection.doc(event._id).remove()
 	if (res.deleted === 1) {
 		return {
 			status: 0,
-			msg: '成功删除第一条数据'
+			msg: '删除成功'
 		}
 	} else {
 		return {

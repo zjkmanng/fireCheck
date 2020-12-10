@@ -62,29 +62,16 @@
 							}
 						}).then((res) => {
 							uni.hideLoading()
-							console.log(res)
-							if (res.result.data.length === 0) {
-								uniCloud.callFunction({
-									name: 'add',
-									data: this.form
-								}).then((res) => {
-									console.log(res)
-									uni.navigateTo({
-									    url: '/pages/index/index'
-									});
+							if (res.result.data[0].password !== this.form.password) {
+								this.$refs.uToast.show({
+									title: '密码错误',
+									type: 'error'
 								})
+								return false;
 							} else {
-								if (res.result.data[0].password !== this.form.password) {
-									this.$refs.uToast.show({
-										title: '密码错误',
-										type: 'error'
-									})
-									return false;
-								} else {
-									uni.switchTab({
-										url: '../ask/index'
-									})
-								}
+								uni.switchTab({
+									url: '/pages/index/index'
+								})
 							}
 						}).catch((err) => {
 							uni.hideLoading()
