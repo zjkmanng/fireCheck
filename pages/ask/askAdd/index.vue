@@ -86,9 +86,9 @@
 			getList() {
 				this.loading = true
 				uniCloud.callFunction({
-					name: 'addFire',
+					name: 'fire',
 					data: {
-						"fireName": "",
+						"handle": "get"
 					}
 				}).then((res) => {
 					this.loading = false
@@ -108,21 +108,23 @@
 			},
 			add() {
 				uniCloud.callFunction({
-					name: 'addFire',
+					name: 'fire',
 					data: {
+						"handle": "post",
 						"fireName": this.fireName,
 						"status": 0
 					}
 				}).then((res) => {
 					this.$u.toast('添加成功')
 					this.fireName = ''
-					this.addlist = res.result.data
+					this.getList()
 				})
 			},
 			del(item) {
 				uniCloud.callFunction({
-					name: 'remove',
+					name: 'fire',
 					data: {
+						"handle": "delete",
 						"_id": item._id
 					}
 				}).then((res) => {
@@ -131,6 +133,10 @@
 				})
 			},
 			details(item) {
+				uni.setStorage({
+					key: "fireId",
+					data: item._id
+				})
 				uni.navigateTo({
 					url: '/pages/ask/askFireDetails/index?item=' + JSON.stringify(item)
 				})

@@ -6,7 +6,7 @@
 		<u-parse :html="data.details" :tag-style="style"></u-parse>
 		
 		<view class="next">
-			<u-button type="primary" @click="next">已阅读，下一步</u-button>
+			<u-button type="primary" @click="back">已阅读，返回</u-button>
 		</view>
 		
 		<view class="home" @click="home">
@@ -34,10 +34,8 @@
 					url: '../../index/index'
 				})
 			},
-			next() {
-				uni.navigateTo({
-					url: '../askForm/index'
-				})
+			back() {
+				uni.navigateBack()
 			}
 		}
 	}

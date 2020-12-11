@@ -56,12 +56,14 @@
 				this.$refs.uForm.validate(valid => {
 					if (valid) {
 						uniCloud.callFunction({
-							name: 'login',
+							name: 'user',
 							data: {
+								handle: 'get',
 								username: this.form.username
 							}
 						}).then((res) => {
 							uni.hideLoading()
+							console.log(res)
 							if (res.result.data[0].password !== this.form.password) {
 								this.$refs.uToast.show({
 									title: '密码错误',
@@ -69,6 +71,10 @@
 								})
 								return false;
 							} else {
+								uni.setStorage({
+									key: 'userId',
+									data: res.result.data[0]._id
+								})
 								uni.switchTab({
 									url: '/pages/index/index'
 								})
