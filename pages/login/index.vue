@@ -23,7 +23,7 @@
 	export default {
 		data() {
 			return {
-				src: 'https://cdn.uviewui.com/uview/example/fade.jpg',
+				src: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/47966b40-3af9-11eb-8ff1-d5dcf8779628.png',
 				form: {
 					username: 'admin',
 					password: ''

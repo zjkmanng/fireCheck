@@ -76,6 +76,12 @@
 			}
 		},
 		{
+			"path": "pages/ask/study/index",
+			"style": {
+				"navigationBarTitleText": "学习"
+			}
+		},
+		{
 			"path": "pages/photo/index",
 			"style": {
 				"navigationBarTitleText": "照相"

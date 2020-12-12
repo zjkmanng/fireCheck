@@ -32,6 +32,10 @@
 				<u-icon name="hourglass" :size="46"></u-icon>
 				<view class="grid-text">修改密码</view>
 			</u-grid-item>
+			<u-grid-item @click="loginOut">
+				<u-icon name="hourglass" :size="46"></u-icon>
+				<view class="grid-text">退出登录</view>
+			</u-grid-item>
 		</u-grid>
 	</view>
 </template>
@@ -49,6 +53,9 @@
 			},
 			editPwd() {
 				this.$u.route('/pages/editpassword/index')
+			},
+			loginOut() {
+				this.$u.route('/pages/login/index')
 			}
 		}
 	}

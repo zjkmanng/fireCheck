@@ -3,11 +3,11 @@
 		<view class="banner">
 			<u-image width="100%" height="300rpx" :src="src"></u-image>
 		</view>
-		<view class="make">
-			<u-button type="primary" @click="make">制作</u-button>
+		<view class="verification">
+			<u-button type="primary" @click="verification">言辞证据的审查验证</u-button>
 		</view>
-		<view class="study">
-			<u-button type="primary" @click="study">学习</u-button>
+		<view class="skill">
+			<u-button type="primary" @click="skill">火灾调查询问笔录的技巧</u-button>
 		</view>
 		<view class="home" @click="home">
 			首页
@@ -19,19 +19,13 @@
 	export default {
 		data() {
 			return {
-				src: 'https://cdn.uviewui.com/uview/example/fade.jpg',
+				src: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/47966b40-3af9-11eb-8ff1-d5dcf8779628.png',
 			}
 		},
 		methods: {
-			make() {
-				this.$u.route('/pages/ask/askAdd/index')
-			},
-			study() {
-				this.$u.route('/pages/ask/study/index')
-			},
 			home() {
 				uni.switchTab({
-					url: '../index/index'
+					url: '../../index/index'
 				})
 			}
 		}
@@ -40,12 +34,12 @@
 
 <style lang="scss" scoped>
 	.container{
-		.make{
+		.verification{
 			width: 80%;
 			margin: 100rpx auto;
 		}
 		
-		.study{
+		.skill{
 			width: 80%;
 			margin: 100rpx auto;
 		}
