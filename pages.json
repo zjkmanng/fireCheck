@@ -76,12 +76,6 @@
 			}
 		},
 		{
-			"path": "pages/ask/study/index",
-			"style": {
-				"navigationBarTitleText": "学习"
-			}
-		},
-		{
 			"path": "pages/photo/index",
 			"style": {
 				"navigationBarTitleText": "照相"
@@ -97,6 +91,12 @@
 			"path": "pages/editpassword/index",
 			"style": {
 				"navigationBarTitleText": "修改密码"
+			}
+		},
+		{
+			"path": "pages/ask/study/index",
+			"style": {
+				"navigationBarTitleText": "学习"
 			}
 		}
 	],
