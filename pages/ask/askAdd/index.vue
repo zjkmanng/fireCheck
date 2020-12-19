@@ -72,6 +72,7 @@
 						name: '已完'
 					}
 				],
+				userId: '',
 				current: 0,
 				swiperCurrent: 0,
 				fireName: '',
@@ -80,15 +81,22 @@
 			}
 		},
 		onLoad() {
-			this.getList()
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userId = res.data
+					this.getList(this.userId)
+				}
+			})
 		},
 		methods: {
-			getList() {
+			getList(userId) {
 				this.loading = true
 				uniCloud.callFunction({
 					name: 'fire',
 					data: {
-						"handle": "get"
+						"handle": "get",
+						"userId": userId
 					}
 				}).then((res) => {
 					this.loading = false
@@ -112,6 +120,7 @@
 					data: {
 						"handle": "post",
 						"fireName": this.fireName,
+						"userId": this.userId,
 						"status": 0
 					}
 				}).then((res) => {
@@ -134,8 +143,8 @@
 			},
 			details(item) {
 				uni.setStorage({
-					key: "fireId",
-					data: item._id
+					key: "fire",
+					data: item
 				})
 				uni.navigateTo({
 					url: '/pages/ask/askFireDetails/index?item=' + JSON.stringify(item)

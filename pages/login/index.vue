@@ -8,7 +8,7 @@
 		</view>
 		<view class="form">
 			<u-form :model="form" ref="uForm" :rules="rules">
-				<u-form-item label="账户" prop="username"><u-input type="text" v-model="form.username" :disabled="true" /></u-form-item>
+				<u-form-item label="账户" prop="username"><u-input type="text" v-model="form.username" /></u-form-item>
 				<u-form-item label="密码" prop="password"><u-input type="password" v-model="form.password" /></u-form-item>
 			</u-form>
 			<view class="loginBtn">
@@ -25,7 +25,7 @@
 			return {
 				src: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/47966b40-3af9-11eb-8ff1-d5dcf8779628.png',
 				form: {
-					username: 'admin',
+					username: '',
 					password: ''
 				},
 				rules: {
@@ -63,21 +63,28 @@
 							}
 						}).then((res) => {
 							uni.hideLoading()
-							console.log(res)
-							if (res.result.data[0].password !== this.form.password) {
+							if (res.result.data.length === 0) {
 								this.$refs.uToast.show({
-									title: '密码错误',
+									title: '账号未注册',
 									type: 'error'
 								})
 								return false;
 							} else {
-								uni.setStorage({
-									key: 'userId',
-									data: res.result.data[0]._id
-								})
-								uni.switchTab({
-									url: '/pages/index/index'
-								})
+								if (res.result.data[0].password !== this.form.password) {
+									this.$refs.uToast.show({
+										title: '密码错误',
+										type: 'error'
+									})
+									return false;
+								} else {
+									uni.setStorage({
+										key: 'userId',
+										data: res.result.data[0]._id
+									})
+									uni.switchTab({
+										url: '/pages/index/index'
+									})
+								}
 							}
 						}).catch((err) => {
 							uni.hideLoading()
