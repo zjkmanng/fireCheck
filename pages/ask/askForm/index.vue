@@ -2,74 +2,72 @@
 	<view class="content">
 		<u-form :model="form" ref="uForm" :rules="rules">
 			<u-form-item label="问次" label-width="250" label-align="left" prop="ask">
-				<u-input v-model="form.ask" :border="border" placeholder="问次" />
+				<u-input v-model="form.ask" :border="border" placeholder="问次(必填)" />
 			</u-form-item>
 			<u-form-item label="时间" label-width="250" label-align="left" prop="startTime">
-				<u-input v-model="form.startTime" :border="border" placeholder="询问时间" disabled @click="startTimeShow = true"/>
+				<u-input :border="border" type="select" :select-open="startTimeShow" v-model="form.startTime" placeholder="询问时间(必填)" @click="startTimeShow = true"></u-input>
 			</u-form-item>
 			<u-form-item label="地点" label-width="250" label-align="left" prop="place">
-				<u-input v-model="form.place" :border="border" placeholder="询问地点" />
+				<u-input v-model="form.place" :border="border" placeholder="询问地点(必填)" />
 			</u-form-item>
 			<u-form-item label="询问人一" label-width="250" label-align="left" prop="inquirer1">
-				<u-input v-model="form.inquirer1" :border="border" placeholder="询问人一" />
+				<u-input v-model="form.inquirer1" :border="border" placeholder="询问人一(必填)" />
 			</u-form-item>
 			<u-form-item label="询问人一工作单位" label-width="250" label-align="left" prop="inquirer1Unit">
-				<u-input v-model="form.inquirer1Unit" :border="border" placeholder="询问人一工作单位" />
+				<u-input v-model="form.inquirer1Unit" :border="border" placeholder="询问人一工作单位(必填)" />
 			</u-form-item>
 			<u-form-item label="询问人二" label-width="250" label-align="left">
-				<u-input v-model="form.inquirer2" :border="border" placeholder="询问人二" />
+				<u-input v-model="form.inquirer2" :border="border" placeholder="询问人二(非必填)" />
 			</u-form-item>
 			<u-form-item label="询问人二工作单位" label-width="250" label-align="left">
-				<u-input v-model="form.inquirer2Unit" :border="border" placeholder="询问人二工作单位" />
+				<u-input v-model="form.inquirer2Unit" :border="border" placeholder="询问人二工作单位(非必填)" />
 			</u-form-item>
 			<u-form-item label="记录人" label-width="250" label-align="left" prop="recorder">
-				<u-input v-model="form.recorder" :border="border" placeholder="记录人" />
+				<u-input v-model="form.recorder" :border="border" placeholder="记录人(必填)" />
 			</u-form-item>
 			<u-form-item label="记录人工作单位" label-width="250" label-align="left" prop="recorderUnit">
-				<u-input v-model="form.recorderUnit" :border="border" placeholder="记录人工作单位" />
+				<u-input v-model="form.recorderUnit" :border="border" placeholder="记录人工作单位(必填)" />
 			</u-form-item>
 			<u-form-item label="被询问人" label-width="250" label-align="left" prop="interviewee">
-				<u-input v-model="form.interviewee" :border="border" placeholder="被询问人" />
+				<u-input v-model="form.interviewee" :border="border" placeholder="被询问人(必填)" />
 			</u-form-item>
 			<u-form-item label="性别" label-width="250" label-align="left" prop="sex">
-				<u-input :border="border" type="select" placeholder="性别" v-model="form.sex" :select-open="actionSexShow" @click="actionSexShow = true"></u-input>
+				<u-input :border="border" type="select" placeholder="性别(必填)" v-model="form.sex" :select-open="actionSexShow" @click="actionSexShow = true"></u-input>
 			</u-form-item>
 			<u-form-item label="年龄" label-width="250" label-align="left" prop="age">
-				<u-input v-model="form.age" :border="border" placeholder="年龄" type="number" />
+				<u-input v-model="form.age" :border="border" placeholder="年龄(必填)" type="number" />
 			</u-form-item>
 			<u-form-item label="出生日期" label-width="250" label-align="left" prop="birthday">
-				<u-input v-model="form.birthday" :border="border" placeholder="出生日期" disabled @click="birthdayShow = true"/>
+				<u-input :border="border" type="select" :select-open="birthdayShow" v-model="form.birthday" placeholder="出生日期(必填)" @click="birthdayShow = true"></u-input>
 			</u-form-item>
 			<u-form-item label="身份证号" label-width="250" label-align="left" prop="cardId">
-				<u-input v-model="form.cardId" :border="border" placeholder="身份证号" disabled @click="cardIdShow = true"/>
+				<u-input v-model="form.cardId" :border="border" placeholder="身份证号(必填)" @click="cardIdShow = true"/>
 			</u-form-item>
 			
 			<u-form-item label="现住址" label-width="250" label-align="left" prop="currentAddress">
-				<u-input v-model="form.currentAddress" :border="border" placeholder="现住址" disabled @click="currentAddressShow = true"/>
+				<u-input :border="border" type="select" :select-open="currentAddressShow" v-model="form.currentAddress" placeholder="现住址(必填)" @click="currentAddressShow = true"></u-input>
 			</u-form-item>
 			<u-form-item label="现住址详细地址" label-width="250" label-align="left" prop="currentAddressDetails">
-				<u-input v-model="form.currentAddressDetails" :border="border" placeholder="现住址详细地址"/>
+				<u-input v-model="form.currentAddressDetails" :border="border" placeholder="现住址详细地址(必填)"/>
 			</u-form-item>
 			<u-form-item label="联系方式" label-width="250" label-align="left" prop="phone">
-				<u-input v-model="form.phone" :border="border" placeholder="联系方式" type="number" maxlength="11"/>
+				<u-input v-model="form.phone" :border="border" placeholder="联系方式(必填)" type="number" maxlength="11"/>
 			</u-form-item>
 			<u-form-item label="户籍所在地" label-width="250" label-align="left" prop="domicile">
-				<u-input v-model="form.domicile" :border="border" placeholder="户籍所在地" disabled @click="domicileShow = true"/>
+				<u-input :border="border" type="select" :select-open="domicileShow" v-model="form.domicile" placeholder="户籍所在地(必填)" @click="domicileShow = true"></u-input>
 			</u-form-item>
 			<u-form-item label="户籍详细地址" label-width="250" label-align="left" prop="domicileDetails">
-				<u-input v-model="form.domicileDetails" :border="border" placeholder="户籍详细地址"/>
+				<u-input v-model="form.domicileDetails" :border="border" placeholder="户籍详细地址(必填)"/>
 			</u-form-item>
-			<u-form-item :label="'问：我们是西安市周至县消防大队的工作人员，现依法向你询问'+ fireName +'火灾有关问题，请你如实回答，作伪证要负法律责任。你依法有申请回避的权利，对与本案无关的问题，你有拒绝回答的权利。你听清楚了没有 ？'" label-width="100%"></u-form-item>
-			<u-form-item label="答:" prop="fireQuestion1">
-				<u-input v-model="form.fireQuestion1" :border="border" placeholder="请输入上面问题答案"/>
+			<u-form-item label="问：你是不是人大代表 ？" prop="fireQuestion1" label-position="top">
+				<u-radio-group v-model="form.fireQuestion1" @change="radioGroupChange1">
+					<u-radio shape="circle" v-for="(item, index) in fireQuestion1List" :key="index" :name="item.name">{{ item.label }}</u-radio>
+				</u-radio-group>
 			</u-form-item>
-			<u-form-item label="问：你是不是人大代表 ？" label-width="100%" ></u-form-item>
-			<u-form-item label="答:" prop="fireQuestion2">
-				<u-input v-model="form.fireQuestion2" :border="border" placeholder="请输入上面问题答案"/>
-			</u-form-item>
-			<u-form-item label="问：请问你是否受到过行政处罚 ？" label-width="100%" ></u-form-item>
-			<u-form-item label="答:" prop="fireQuestion3">
-				<u-input v-model="form.fireQuestion3" :border="border" placeholder="请输入上面问题答案"/>
+			<u-form-item label="问：请问你是否受到过行政处罚 ？" prop="fireQuestion2" label-position="top">
+				<u-radio-group v-model="form.fireQuestion2" @change="radioGroupChange2">
+					<u-radio shape="circle" v-for="(item, index) in fireQuestion2List" :key="index" :name="item.name">{{ item.label }}</u-radio>
+				</u-radio-group>
 			</u-form-item>
 		</u-form>
 		<view class="submitBtn">
@@ -134,25 +132,24 @@
 					'domicile': '',
 					'domicileDetails': '',
 					'fireQuestion1': '',
-					'fireQuestion2': '',
-					'fireQuestion3': ''
+					'fireQuestion2': ''
 				},
 				rules: {
 					ask: [{required: true, message: '请输入问次', trigger: ['change','blur']}],
-					startTime: [{required: true, message: '请选择询问时间', trigger: ['change','blur']}],
+					startTime: [{required: true, message: '请选择询问时间', trigger: 'change'}],
 					place: [{required: true, message: '请输入询问地点', trigger: ['change','blur']}],
 					inquirer1: [{required: true, message: '请输入询问人', trigger: ['change','blur']}],
 					inquirer1Unit: [{required: true, message: '请输入询问人工作单位', trigger: ['change','blur']}],
 					recorder: [{required: true, message: '请输入记录人', trigger: ['change','blur']}],
 					recorderUnit: [{required: true, message: '请输入记录人工作单位', trigger: ['change','blur']}],
 					interviewee: [{required: true, message: '请输入被询问人', trigger: ['change','blur']}], 
-					sex: [{required: true, message: '请选择性别', trigger: ['change','blur']}],
+					sex: [{required: true, message: '请选择性别', trigger: 'change'}],
 					age: [{required: true, message: '请输入年龄', trigger: ['change','blur']}],
-					birthday: [{required: true, message: '请选择出生日期', trigger: ['change','blur']}],
+					birthday: [{required: true, message: '请选择出生日期', trigger: 'change'}],
 					cardId: [
 						{
 							required: true,
-							message: '请输入身份证号',
+							message: '请输入正确身份证号',
 							trigger: ['change','blur'],
 						},
 						{
@@ -162,10 +159,10 @@
 							},
 							message: '身份证号不正确',
 							// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-							trigger: ['change','blur']
+							trigger: ['change']
 						}
 					],
-					currentAddress: [{required: true, message: '请输入现住址', trigger: ['change','blur']}],
+					currentAddress: [{required: true, message: '请选择现住址', trigger: 'change'}],
 					currentAddressDetails: [{required: true, message: '请输入现住址详细地址', trigger: ['change','blur']}],
 					phone: [
 						{
@@ -183,11 +180,10 @@
 							trigger: ['change','blur']
 						}
 					],
-					domicile: [{required: true, message: '请输入现住址', trigger: ['change','blur']}],
-					domicileDetails: [{required: true, message: '请输入现住址', trigger: ['change','blur']}],
-					fireQuestion1: [{required: true, message: '请输入答案一', trigger: ['change','blur']}],
-					fireQuestion2: [{required: true, message: '请输入答案二', trigger: ['change','blur']}],
-					fireQuestion3: [{required: true, message: '请输入答案三', trigger: ['change','blur']}]
+					domicile: [{required: true, message: '请选择户籍所在地', trigger: 'change'}],
+					domicileDetails: [{required: true, message: '请输入户籍所在地详细地址', trigger: ['change','blur']}],
+					fireQuestion1: [{required: true, message: '请输入答案一', trigger: 'change'}],
+					fireQuestion2: [{required: true, message: '请输入答案二', trigger: ['change','blur']}]
 				},
 				actionSheetList: [
 					{
@@ -197,6 +193,26 @@
 					{
 						text: '女',
 						value: 1
+					}
+				],
+				fireQuestion1List: [
+					{
+						name: '0',
+						label: '是'
+					},
+					{
+						name: '1',
+						label: '否'
+					}
+				],
+				fireQuestion2List: [
+					{
+						name: '0',
+						label: '是'
+					},
+					{
+						name: '1',
+						label: '否'
 					}
 				]
 			}
@@ -209,6 +225,9 @@
 					this.fireName = res.data.fireName
 				}
 			})
+		},
+		onReady() {
+			// this.$refs.uForm.setRules(this.rules)
 		},
 		methods: {
 			startTimeConfirm(e) {
@@ -240,10 +259,24 @@
 				console.log(e)
 				this.form.domicile = e.province.label + e.city.label + e.area.label
 			},
+			radioGroupChange1(e) {
+				console.log(e)
+				this.form.fireQuestion1 = e
+			},
+			radioGroupChange2(e) {
+				console.log(e)
+				this.form.fireQuestion2 = e
+			},
 			submit() {
 				this.$refs.uForm.validate(valid => {
+					console.log(valid)
 					if (valid) {
+						
 						console.log(this.form)
+						uni.setStorage({
+							key: 'company',
+							data: this.form.inquirer1Unit
+						})
 						uni.getStorage({
 							key: "fireId",
 							success: (res) => {
