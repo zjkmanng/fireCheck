@@ -74,6 +74,10 @@
 		methods: {
 			details(item) {
 				if (item.details !== '') {
+					uni.setStorage({
+						key: 'askType',
+						data: item
+					})
 					uni.navigateTo({
 						url: './details?data=' + JSON.stringify(item)
 					})

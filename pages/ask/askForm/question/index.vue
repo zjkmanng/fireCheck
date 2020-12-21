@@ -4,6 +4,9 @@
 			<u-form-item label="">
 				<u-input v-model="form.question" :border="border" placeholder="请选择问题" disabled @click="questionListShow = true"/>
 			</u-form-item>
+			<u-form-item label="">
+				<u-input v-model="form.questiondiy" :border="border" placeholder="请选择问题" disabled @click="questionDiyListShow = true"/>
+			</u-form-item>
 			<u-form-item label="问" label-position="top" prop="ask">
 				<view class="deleteContent">
 					<view class="input">
@@ -24,10 +27,11 @@
 		<view class="btn">
 			<u-button type="primary" size="medium" @click="save">保存此问，添加下一问</u-button>
 		</view>
-		<view class="home" @click="home">
+		<!-- <view class="home" @click="home">
 			首页
-		</view>
+		</view> -->
 		<u-select v-model="questionListShow" :list="questionList" @confirm="confirm"></u-select>
+		<u-select v-model="questionDiyListShow" :list="questionDiyList" @confirm="confirmDiy"></u-select>
 		<u-modal v-model="modelShow" :content="content" :show-cancel-button="true" @confirm="confirmQuestion" @cancel="cancelQuestion"></u-modal>
 	</view>
 </template>
@@ -39,10 +43,11 @@
 				activeIndex: 0,
 				border: true,
 				questionListShow: false,
+				questionDiyListShow: false,
 				modelShow: false,
 				form: {
-					order: '',
 					question: '',
+					questiondiy: '',
 					ask: '',
 					answer: ''
 				},
@@ -114,22 +119,176 @@
 						label: '其他与火灾有关联或了解火灾相关情况的人',
 						value: ''
 					}
+				],
+				questionDiyList: [
+					{
+						label: '对消防扑救人员了解的问题',
+						extra: [
+							{
+								questionName: '请你简述下火灾现场的基本情况？',
+								answer: ''
+							},
+							{
+								questionName: '请你简述下现场的燃烧特征？',
+								answer: ''
+							},
+							{
+								questionName: '火灾现场有没有异常的气味？',
+								answer: ''
+							},
+							{
+								questionName: '火灾现场有没有异常的响声？',
+								answer: ''
+							},
+							{
+								questionName: '请描述下你到达火灾现场时现场门窗关闭的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请描述下你到达火灾现场时现场门窗等出入口有没有强行进入的痕迹？',
+								answer: ''
+							},
+							{
+								questionName: '请描述一下你采取的扑救措施、扑救顺序、水量布置、供水、破拆等现场扑救的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请描述一下现场设备、设施的工作状况、破坏情况等？',
+								answer: ''
+							},
+							{
+								questionName: '请说明一下现场消防设施的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请问你有没有发现非现场的火源，或放火遗留物？',
+								answer: ''
+							},
+							{
+								questionName: '请说明一下你知道的现场其他人的活动情况？',
+								answer: ''
+							},
+							{
+								questionName: '请说明一下现场抢救人的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请讲述一下你知道的现场人员向你反映的有关情况？',
+								answer: ''
+							},
+							{
+								questionName: '请问接警时间和到达火灾现场的时间是？',
+								answer: ''
+							},
+							{
+								questionName: '请描述一下扑救时的天气情况？',
+								answer: ''
+							},
+							{
+								questionName: '请问最初进入火场时，现场有没有对周围环境及起火部位的照相、录像等资料？',
+								answer: ''
+							}
+						]
+					},
+					{
+						label: '向发现火灾的人和报警人了解的问题',
+						extra: [
+							{
+								questionName: '请你简述下火灾现场的基本情况？',
+								answer: ''
+							},
+							{
+								questionName: '请你简述下现场的燃烧特征？',
+								answer: ''
+							},
+							{
+								questionName: '火灾现场有没有异常的气味？',
+								answer: ''
+							},
+							{
+								questionName: '火灾现场有没有异常的响声？',
+								answer: ''
+							},
+							{
+								questionName: '请描述下你到达火灾现场时现场门窗关闭的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请描述下你到达火灾现场时现场门窗等出入口有没有强行进入的痕迹？',
+								answer: ''
+							},
+							{
+								questionName: '请描述一下你采取的扑救措施、扑救顺序、水量布置、供水、破拆等现场扑救的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请描述一下现场设备、设施的工作状况、破坏情况等？',
+								answer: ''
+							},
+							{
+								questionName: '请说明一下现场消防设施的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请问你有没有发现非现场的火源，或放火遗留物？',
+								answer: ''
+							},
+							{
+								questionName: '请说明一下你知道的现场其他人的活动情况？',
+								answer: ''
+							},
+							{
+								questionName: '请说明一下现场抢救人的情况？',
+								answer: ''
+							},
+							{
+								questionName: '请讲述一下你知道的现场人员向你反映的有关情况？',
+								answer: ''
+							},
+							{
+								questionName: '请问接警时间和到达火灾现场的时间是？',
+								answer: ''
+							},
+							{
+								questionName: '请描述一下扑救时的天气情况？',
+								answer: ''
+							},
+							{
+								questionName: '请问最初进入火场时，现场有没有对周围环境及起火部位的照相、录像等资料？',
+								answer: ''
+							}
+						]
+					}
 				]
 			}
 		},
+		onLoad() {
+			uni.getStorage({
+				key: 'askType',
+				success: (res) => {
+					this.form.question = res.data.name
+					this.details = res.data.details
+				}
+			})
+		},
 		methods: {
 			confirm(e) {
-				this.modelShow = true
-				this.question = e[0].label
+				this.form.question = e[0].label
 				this.details = e[0].value
 			},
+			confirmDiy(e) {
+				console.log(e)
+				this.modelShow = true
+				this.form.questiondiy = e[0].label
+				this.form.ask = e[0].extra[0].questionName
+			},
 			confirmQuestion() {
-				this.form.question = this.question
-				this.form.ask = this.question
+				// this.form.question = this.question
+				// this.form.ask = this.question
 			},
 			cancelQuestion() {
 				this.questionListShow = false
-				this.form.question = this.question
+				// this.form.questiondiy = this.form.question
 			},
 			deleteAsk() {
 				this.form.ask = ''

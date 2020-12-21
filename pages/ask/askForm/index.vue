@@ -135,55 +135,55 @@
 					'fireQuestion2': ''
 				},
 				rules: {
-					ask: [{required: true, message: '请输入问次', trigger: ['change','blur']}],
-					startTime: [{required: true, message: '请选择询问时间', trigger: 'change'}],
-					place: [{required: true, message: '请输入询问地点', trigger: ['change','blur']}],
-					inquirer1: [{required: true, message: '请输入询问人', trigger: ['change','blur']}],
+					// ask: [{required: true, message: '请输入问次', trigger: ['change','blur']}],
+					// startTime: [{required: true, message: '请选择询问时间', trigger: 'change'}],
+					// place: [{required: true, message: '请输入询问地点', trigger: ['change','blur']}],
+					// inquirer1: [{required: true, message: '请输入询问人', trigger: ['change','blur']}],
 					inquirer1Unit: [{required: true, message: '请输入询问人工作单位', trigger: ['change','blur']}],
-					recorder: [{required: true, message: '请输入记录人', trigger: ['change','blur']}],
-					recorderUnit: [{required: true, message: '请输入记录人工作单位', trigger: ['change','blur']}],
-					interviewee: [{required: true, message: '请输入被询问人', trigger: ['change','blur']}], 
-					sex: [{required: true, message: '请选择性别', trigger: 'change'}],
-					age: [{required: true, message: '请输入年龄', trigger: ['change','blur']}],
-					birthday: [{required: true, message: '请选择出生日期', trigger: 'change'}],
-					cardId: [
-						{
-							required: true,
-							message: '请输入正确身份证号',
-							trigger: ['change','blur'],
-						},
-						{
-							validator: (rule, value, callback) => {
-								// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
-								return this.$u.test.idCard(value);
-							},
-							message: '身份证号不正确',
-							// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-							trigger: ['change']
-						}
-					],
-					currentAddress: [{required: true, message: '请选择现住址', trigger: 'change'}],
-					currentAddressDetails: [{required: true, message: '请输入现住址详细地址', trigger: ['change','blur']}],
-					phone: [
-						{
-							required: true,
-							message: '请输入手机号',
-							trigger: ['change','blur'],
-						},
-						{
-							validator: (rule, value, callback) => {
-								// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
-								return this.$u.test.mobile(value);
-							},
-							message: '手机号码不正确',
-							// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-							trigger: ['change','blur']
-						}
-					],
-					domicile: [{required: true, message: '请选择户籍所在地', trigger: 'change'}],
-					domicileDetails: [{required: true, message: '请输入户籍所在地详细地址', trigger: ['change','blur']}],
-					fireQuestion1: [{required: true, message: '请输入答案一', trigger: 'change'}],
-					fireQuestion2: [{required: true, message: '请输入答案二', trigger: ['change','blur']}]
+					// recorder: [{required: true, message: '请输入记录人', trigger: ['change','blur']}],
+					// recorderUnit: [{required: true, message: '请输入记录人工作单位', trigger: ['change','blur']}],
+					// interviewee: [{required: true, message: '请输入被询问人', trigger: ['change','blur']}], 
+					// sex: [{required: true, message: '请选择性别', trigger: 'change'}],
+					// age: [{required: true, message: '请输入年龄', trigger: ['change','blur']}],
+					// birthday: [{required: true, message: '请选择出生日期', trigger: 'change'}],
+					// cardId: [
+					// 	{
+					// 		required: true,
+					// 		message: '请输入正确身份证号',
+					// 		trigger: ['change','blur'],
+					// 	},
+					// 	{
+					// 		validator: (rule, value, callback) => {
+					// 			// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
+					// 			return this.$u.test.idCard(value);
+					// 		},
+					// 		message: '身份证号不正确',
+					// 		// 触发器可以同时用blur和change，二者之间用英文逗号隔开
+					// 		trigger: ['change']
+					// 	}
+					// ],
+					// currentAddress: [{required: true, message: '请选择现住址', trigger: 'change'}],
+					// currentAddressDetails: [{required: true, message: '请输入现住址详细地址', trigger: ['change','blur']}],
+					// phone: [
+					// 	{
+					// 		required: true,
+					// 		message: '请输入手机号',
+					// 		trigger: ['change','blur'],
+					// 	},
+					// 	{
+					// 		validator: (rule, value, callback) => {
+					// 			// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
+					// 			return this.$u.test.mobile(value);
+					// 		},
+					// 		message: '手机号码不正确',
+					// 		// 触发器可以同时用blur和change，二者之间用英文逗号隔开
+					// 		trigger: ['change','blur']
+					// 	}
+					// ],
+					// domicile: [{required: true, message: '请选择户籍所在地', trigger: 'change'}],
+					// domicileDetails: [{required: true, message: '请输入户籍所在地详细地址', trigger: ['change','blur']}],
+					// fireQuestion1: [{required: true, message: '请输入答案一', trigger: 'change'}],
+					// fireQuestion2: [{required: true, message: '请输入答案二', trigger: ['change','blur']}]
 				},
 				actionSheetList: [
 					{
@@ -227,7 +227,7 @@
 			})
 		},
 		onReady() {
-			// this.$refs.uForm.setRules(this.rules)
+			this.$refs.uForm.setRules(this.rules)
 		},
 		methods: {
 			startTimeConfirm(e) {
