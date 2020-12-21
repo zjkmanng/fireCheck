@@ -76,6 +76,12 @@
 			}
 		},
 		{
+			"path": "pages/ask/askForm/questionOne/index",
+			"style": {
+				"navigationBarTitleText": "问答提纲"
+			}
+		},
+		{
 			"path": "pages/photo/index",
 			"style": {
 				"navigationBarTitleText": "照相"

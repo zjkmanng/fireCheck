@@ -271,12 +271,6 @@
 				this.$refs.uForm.validate(valid => {
 					console.log(valid)
 					if (valid) {
-						
-						console.log(this.form)
-						uni.setStorage({
-							key: 'company',
-							data: this.form.inquirer1Unit
-						})
 						uni.getStorage({
 							key: "fireId",
 							success: (res) => {
@@ -291,8 +285,15 @@
 										key: "recordId",
 										data: r.result.id
 									})
+									
+									uni.setStorage({
+										key: 'company',
+										data: this.form.inquirer1Unit
+									})
+									
+									
 									uni.navigateTo({
-										url: './question/index'
+										url: './questionOne/index'
 									})
 								})
 							}
