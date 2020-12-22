@@ -9,9 +9,9 @@
 			<u-button type="primary" @click="back">已阅读，返回</u-button>
 		</view>
 		
-		<view class="home" @click="home">
+		<!-- <view class="home" @click="home">
 			首页
-		</view>
+		</view> -->
 	</view>
 </template>
 
@@ -27,6 +27,7 @@
 		},
 		onLoad(data) {
 			this.data = JSON.parse(data.data)
+			console.log(this.data)
 		},
 		methods: {
 			home() {
