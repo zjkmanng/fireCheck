@@ -7,19 +7,29 @@
 			<u-form-item label="">
 				<u-input v-model="form.questiondiy" :border="border" placeholder="请选择问题" disabled @click="questionDiyListShow = true"/>
 			</u-form-item>
-			<u-form-item label="问" label-position="top" prop="ask">
-				<view class="deleteContent">
-					<view class="input">
-						<u-input v-model="form.ask" type="textarea" :border="border" height="100" :auto-height="true" placeholder="请输入问题" />
-					</view>
-					<view class="delete">
+			<u-form-item label="问">
+				<view class="deleteBtn">
+					<view class="delBtn">
 						<u-button type="warning" size="medium" @click="deleteAsk">清除</u-button>
 					</view>
 				</view>
 			</u-form-item>
+			
+			<u-form-item prop="ask">
+				<view class="deleteContent">
+					<view class="input">
+						<u-input v-model="form.ask" type="textarea" :border="border" height="100" :auto-height="true" placeholder="请输入问题" />
+					</view>
+					<view class="upload">
+						<u-upload ref="uUploadQuestion" :action="questionAction" max-count="1" :auto-upload="false" ></u-upload>
+					</view>
+				</view>
+			</u-form-item>
+			
 			<u-form-item label="答" label-position="top" prop="answer">
 				<u-input v-model="form.answer" type="textarea" :border="border" height="150" :auto-height="true" placeholder="请输入答案" />
 			</u-form-item>
+			<u-upload ref="uUploadAnswer" :action="answerAction" max-count="1" :auto-upload="false" ></u-upload>
 		</u-form>
 		<view class="btn">
 			<u-button type="primary" size="medium" @click="see">查看题纲</u-button>
@@ -747,19 +757,13 @@
 		
 		.deleteContent{
 			width: 100%;
+		}
+		
+		.deleteBtn{
+			width: 100%;
 			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			
-			.input{
-				flex: 2;
-			}
-			
-			.delete{
-				flex: 1;
-				display: flex;
-				justify-content: flex-end;
-			}
+			justify-content: flex-end;
+			justify-items: flex-end;
 		}
 		
 		.btn{
