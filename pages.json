@@ -66,18 +66,18 @@
 		{
 			"path": "pages/ask/askForm/question/index",
 			"style": {
-				"navigationBarTitleText": "问答",
-				"app-plus": {
-					"titleNView": {
-						"autoBackButton": false
-					}
-				}
+				"navigationBarTitleText": "问答"
 			}
 		},
 		{
 			"path": "pages/ask/askForm/question/details",
 			"style": {
-				"navigationBarTitleText": "问答提纲"
+				"navigationBarTitleText": "问答提纲",
+				"app-plus": {
+					"titleNView": {
+						"autoBackButton": false
+					}
+				}
 			}
 		},
 		{

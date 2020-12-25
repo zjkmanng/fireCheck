@@ -689,6 +689,7 @@
 			uni.getStorage({
 				key: 'record',
 				success: (res) => {
+					console.log(res)
 					this.submitData = res.data
 				}
 			})
@@ -855,6 +856,7 @@
 				}
 			},
 			createRecord() {
+				console.log(this.submitData)
 				// uni.getStorage({
 				// 	key: "recordId",
 				// 	success: (res) => {
@@ -870,11 +872,6 @@
 				this.$refs.uUploadQuestion.clear()
 				this.$refs.uUploadAnswer.clear()
 				this.initQuestion()
-			},
-			home() {
-				uni.switchTab({
-					url: '../../index/index'
-				})
 			}
 		}
 	}

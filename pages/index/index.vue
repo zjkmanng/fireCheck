@@ -47,6 +47,14 @@
 				src: 'https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/47966b40-3af9-11eb-8ff1-d5dcf8779628.png'
 			}
 		},
+		onLoad() {
+			uni.getStorage({
+				key: 'userId',
+				success: (res) => {
+					this.userId = res.data
+				}
+			})
+		},
 		methods: {
 			question() {
 				this.$u.route('/pages/ask/index')
