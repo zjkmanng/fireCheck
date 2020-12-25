@@ -1,41 +1,82 @@
 <template>
 	<view class="content">
-		<u-form :model="form" ref="uForm" :rules="rules">
-			<u-form-item label="">
-				<u-input v-model="form.question" :border="border" placeholder="请选择问题" disabled @click="questionListShow = true"/>
-			</u-form-item>
-			<u-form-item label="">
-				<u-input v-model="form.questiondiy" :border="border" placeholder="请选择问题" disabled @click="questionDiyListShow = true"/>
-			</u-form-item>
-			<u-form-item label="问">
-				<view class="deleteBtn">
-					<view class="delBtn">
-						<u-button type="warning" size="medium" @click="deleteAsk">清除</u-button>
+		<u-form :model="form" ref="uForm">
+			<view v-if="showPrevQuestion === true" class="">
+				<view v-for="(item,index) in saveQuestionList" :key="index">
+					<view v-if="activeIndex === index" class="">
+						<u-form-item label="">
+							<u-input v-model="form.question" :border="border" placeholder="请选择问题" disabled @click="questionListShow = true"/>
+						</u-form-item>
+						<u-form-item label="">
+							<u-input v-model="form.questiondiy" :border="border" placeholder="请选择问题" disabled @click="questionDiyListShow = true"/>
+						</u-form-item>
+						<u-form-item label="问">
+							<view class="deleteBtn">
+								<view class="delBtn">
+									<u-button type="warning" size="medium" @click="deleteAsk">清除</u-button>
+								</view>
+							</view>
+						</u-form-item>
+						
+						<u-form-item>
+							<view class="deleteContent">
+								<view class="input">
+									<u-input v-model="form.ask" type="textarea" :border="border" height="100" :auto-height="true" placeholder="请输入问题1" />
+								</view>
+								<view class="upload">
+									<u-upload ref="uUploadQuestion" action="" :fileList="questionPicList" max-count="1" :auto-upload="false" ></u-upload>
+								</view>
+							</view>
+						</u-form-item>
+						
+						<u-form-item label="答" label-position="top">
+							<u-input v-model="form.answer" type="textarea" :border="border" height="150" :auto-height="true" placeholder="请输入答案1" />
+						</u-form-item>
+						<u-upload ref="uUploadAnswer" action="" :fileList="answerPicList" max-count="1" :auto-upload="false" ></u-upload>
 					</view>
 				</view>
-			</u-form-item>
+			</view>
 			
-			<u-form-item prop="ask">
-				<view class="deleteContent">
-					<view class="input">
-						<u-input v-model="form.ask" type="textarea" :border="border" height="100" :auto-height="true" placeholder="请输入问题" />
+			<view v-else class="">
+				<u-form-item label="">
+					<u-input v-model="form.question" :border="border" placeholder="请选择问题" disabled @click="questionListShow = true"/>
+				</u-form-item>
+				<u-form-item label="">
+					<u-input v-model="form.questiondiy" :border="border" placeholder="请选择问题" disabled @click="questionDiyListShow = true"/>
+				</u-form-item>
+				<u-form-item label="问">
+					<view class="deleteBtn">
+						<view class="delBtn">
+							<u-button type="warning" size="medium" @click="deleteAsk">清除</u-button>
+						</view>
 					</view>
-					<view class="upload">
-						<u-upload ref="uUploadQuestion" :action="questionAction" max-count="1" :auto-upload="false" ></u-upload>
+				</u-form-item>
+				
+				<u-form-item>
+					<view class="deleteContent">
+						<view class="input">
+							<u-input v-model="form.ask" type="textarea" :border="border" height="100" :auto-height="true" placeholder="请输入问题" />
+						</view>
+						<view class="upload">
+							<u-upload ref="uUploadQuestion" action="" :fileList="questionPicList" max-count="1" :auto-upload="false" @on-choose-complete="beforePicChange"></u-upload>
+						</view>
 					</view>
-				</view>
-			</u-form-item>
-			
-			<u-form-item label="答" label-position="top" prop="answer">
-				<u-input v-model="form.answer" type="textarea" :border="border" height="150" :auto-height="true" placeholder="请输入答案" />
-			</u-form-item>
-			<u-upload ref="uUploadAnswer" :action="answerAction" max-count="1" :auto-upload="false" ></u-upload>
+				</u-form-item>
+				
+				<u-form-item label="答" label-position="top">
+					<u-input v-model="form.answer" type="textarea" :border="border" height="150" :auto-height="true" placeholder="请输入答案" />
+				</u-form-item>
+				<u-upload ref="uUploadAnswer" action="" :fileList="answerPicList" max-count="1" :auto-upload="false" @on-choose-complete="afterPicChange"></u-upload>
+			</view>
 		</u-form>
 		<view class="btn">
 			<u-button type="primary" size="medium" @click="see">查看题纲</u-button>
 		</view>
 		<view v-if="showPrevBtn === true" class="btn">
 			<u-button type="primary" size="medium" @click="prev">上一问</u-button>
+		</view>
+		<view v-if="showPrevBtn === true" class="btn">
+			<u-button type="primary" size="medium" @click="next">下一问</u-button>
 		</view>
 		<view class="btn">
 			<u-button type="primary" size="medium" @click="save">保存此问，添加下一问</u-button>
@@ -56,7 +97,9 @@
 	export default {
 		data() {
 			return {
+				showPrevQuestion: false,
 				showPrevBtn: false,
+				showNextBtn: false,
 				activeIndex: 0,
 				border: true,
 				questionListShow: false,
@@ -66,28 +109,14 @@
 					question: '',
 					questiondiy: '',
 					ask: '',
-					answer: ''
+					answer: '',
+					beforePic: '',
+					afterPic: ''
 				},
 				content: '是否替换问题内容？',
 				ask: '',
 				question: '',
 				details: '',
-				rules: {
-					ask: [
-						{
-							required: true,
-							message: '请输入问题',
-							trigger: ['change','blur'],
-						}
-					],
-					answer: [
-						{
-							required: true,
-							message: '请输入答案',
-							trigger: ['change','blur'],
-						}
-					]
-				},
 				questionList: [
 					{
 						label: '最先发现起火的人和最先报警的人',
@@ -649,14 +678,20 @@
 					}
 				],
 				questionDiyList: [],
-				saveQuestionList: []
+				saveQuestionList: [],
+				questionPicList: [],
+				answerPicList: [],
+				submitData: []
 			}
 		},
 		onLoad() {
 			this.initQuestion()
-		},
-		onReady() {
-			this.$refs.uForm.setRules(this.rules)
+			uni.getStorage({
+				key: 'record',
+				success: (res) => {
+					this.submitData = res.data
+				}
+			})
 		},
 		methods: {
 			initQuestion() {
@@ -677,13 +712,22 @@
 				})
 			},
 			confirm(e) {
+				console.log(e)
 				this.form.question = e[0].label
 				this.details = e[0].value
 				this.questionDiyList = e[0].extra
-				this.form.questiondiy = this.questionDiyList[0].label
+				if (this.questionDiyList.length > 0) {
+					this.form.questiondiy = this.questionDiyList[0].label
+					this.form.ask = this.form.questiondiy
+				} else {
+					this.form.ask = ''
+					this.form.answer = ''
+					this.form.questiondiy = ''
+					this.$refs.uUploadQuestion.clear()
+					this.$refs.uUploadAnswer.clear()
+				}
 			},
 			confirmDiy(e) {
-				console.log(e)
 				this.form.questiondiy = e[0].label
 				this.ask = e[0].label
 				this.modelShow = true
@@ -697,6 +741,36 @@
 			},
 			deleteAsk() {
 				this.form.ask = ''
+			},
+			beforePicChange(lists, name) {
+				this.questionPicList = lists
+				const url = lists[0].url
+				uni.request({
+				    url: url,
+				    method:'GET',
+				    responseType:'arraybuffer',
+				    success: ress => {
+				        let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64
+				        this.form.beforePic = 'data:image/jpeg;base64,' + base64 //不加上这串字符，在页面无法显示的哦
+					},fail: (e) => {
+				        console.log("图片转换失败");
+					}
+				})
+			},
+			afterPicChange(lists, name) {
+				this.answerPicList = lists
+				const url = lists[0].url
+				uni.request({
+				    url: url,
+				    method:'GET',
+				    responseType:'arraybuffer',
+				    success: ress => {
+				        let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64
+				        this.form.afterPic = 'data:image/jpeg;base64,' + base64 //不加上这串字符，在页面无法显示的哦
+					},fail: (e) => {
+				        console.log("图片转换失败");
+					}
+				})
 			},
 			see() {
 				if (this.details === '') {
@@ -712,34 +786,89 @@
 				}
 			},
 			save() {
-				this.$refs.uForm.validate(valid => {
-					if (valid) {
-						
-						this.saveQuestionList.push({
-							questionName: this.form.ask,
-							answer: this.form.answer
-						})
-						this.showPrevBtn = true
-						
-						uni.getStorage({
-							key: "recordId",
-							success: (res) => {
-								console.log(res.data)
-								
-							}
-						})
-					}
+				if (this.form.ask === '' && this.questionPicList.length === 0) {
+					uni.showToast({
+						title: '请输入问题'
+					})
+					return false
+				}
+				
+				if (this.form.answer === '' && this.answerPicList.length === 0) {
+					uni.showToast({
+						title: '请输入答案',
+						icon: 'none'
+					})
+					return false
+				}
+				
+				this.saveQuestionList.push({
+					question: this.form.question,
+					questiondiy: this.form.questiondiy,
+					ask: this.form.ask,
+					answer: this.form.answer,
+					beforePic: this.form.beforePic,
+					questionPicList: this.questionPicList,
+					afterPic: this.form.afterPic,
+					answerPicList: this.answerPicList
 				})
+				this.showPrevBtn = true
+				this.activeIndex = this.activeIndex +1
+				this.reset()
 			},
 			prev() {
-				
+				if (this.activeIndex > 0) {
+					this.form = this.saveQuestionList[this.activeIndex - 1]
+					this.showPrevQuestion = true
+					if (this.activeIndex > 1) {
+						this.activeIndex = this.activeIndex -1
+					} else {
+						this.activeIndex = 0
+					}
+				} else {
+					uni.showToast({
+						title: '已经是第一问了',
+						duration: 2000
+					})
+				}
+			},
+			next() {
+				if (this.showPrevQuestion) {
+					if (this.activeIndex < this.saveQuestionList.length - 1) {
+						this.form = this.saveQuestionList[this.activeIndex + 1]
+						this.showPrevQuestion = true
+						if (this.activeIndex < this.saveQuestionList.length) {
+							this.activeIndex = this.activeIndex +1
+						} else {
+							this.activeIndex = this.saveQuestionList.length
+						}
+					} else {
+						uni.showToast({
+							title: '已经是最后一问了',
+							duration: 2000
+						})
+					}
+				} else {
+					uni.showToast({
+						title: '请先查看上一问',
+						duration: 2000
+					})
+				}
 			},
 			createRecord() {
-				
+				// uni.getStorage({
+				// 	key: "recordId",
+				// 	success: (res) => {
+				// 		console.log(res.data)
+				// 		console.log(this.submitData)
+				// 		this.reset()
+				// 	}
+				// })
 			},
 			reset() {
 				this.form.ask = '',
 				this.form.answer = ''
+				this.$refs.uUploadQuestion.clear()
+				this.$refs.uUploadAnswer.clear()
 				this.initQuestion()
 			},
 			home() {

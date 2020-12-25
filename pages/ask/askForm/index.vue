@@ -123,7 +123,7 @@
 					'interviewee': '',
 					'sexValue': '',
 					'sex': '',
-					'age': '',
+					'age': null,
 					'birthday': '',
 					'cardId': '',
 					'currentAddress': '',
@@ -131,8 +131,8 @@
 					'phone': '',
 					'domicile': '',
 					'domicileDetails': '',
-					'fireQuestion1': '',
-					'fireQuestion2': ''
+					'fireQuestion1': null,
+					'fireQuestion2': null
 				},
 				rules: {
 					// ask: [{required: true, message: '请输入问次', trigger: ['change','blur']}],
@@ -197,21 +197,21 @@
 				],
 				fireQuestion1List: [
 					{
-						name: '0',
+						name: 1,
 						label: '是'
 					},
 					{
-						name: '1',
+						name: 0,
 						label: '否'
 					}
 				],
 				fireQuestion2List: [
 					{
-						name: '0',
+						name: 1,
 						label: '是'
 					},
 					{
-						name: '1',
+						name: 0,
 						label: '否'
 					}
 				]
@@ -268,34 +268,53 @@
 				this.form.fireQuestion2 = e
 			},
 			submit() {
+				console.log('fdsafds')
 				this.$refs.uForm.validate(valid => {
 					console.log(valid)
 					if (valid) {
+						console.log(valid)
 						uni.getStorage({
-							key: "fireId",
+							key: "fire",
 							success: (res) => {
+								console.log("fireId" + res.data)
 								this.form.handle = 'post'
 								this.form.fireId = res.data
-								uniCloud.callFunction({
-									name: 'record',
-									data: this.form
-								}).then((r) => {
-									console.log(r)
-									uni.setStorage({
-										key: "recordId",
-										data: r.result.id
-									})
-									
-									uni.setStorage({
-										key: 'company',
-										data: this.form.inquirer1Unit
-									})
-									
-									
-									uni.navigateTo({
-										url: './questionOne/index'
-									})
+								
+								uni.setStorage({
+									key: 'company',
+									data: this.form.inquirer1Unit
 								})
+								
+								console.log(this.form)
+								uni.setStorage({
+									key: 'record',
+									data: this.form
+								})
+								
+								uni.navigateTo({
+									url: './questionOne/index'
+								})
+								
+								// uniCloud.callFunction({
+								// 	name: 'record',
+								// 	data: this.form
+								// }).then((r) => {
+								// 	console.log(r)
+								// 	uni.setStorage({
+								// 		key: "recordId",
+								// 		data: r.result.id
+								// 	})
+									
+								// 	uni.setStorage({
+								// 		key: 'company',
+								// 		data: this.form.inquirer1Unit
+								// 	})
+									
+									
+								// 	uni.navigateTo({
+								// 		url: './questionOne/index'
+								// 	})
+								// })
 							}
 						})
 					}

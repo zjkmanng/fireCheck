@@ -56,6 +56,12 @@
 			},
 			loginOut() {
 				this.$u.route('/pages/login/index')
+			},
+			camera() {
+				this.$u.route('/pages/photo/index')
+			},
+			order() {
+				this.$u.route('/pages/loss/index')
 			}
 		}
 	}
