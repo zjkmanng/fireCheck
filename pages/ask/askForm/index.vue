@@ -59,14 +59,14 @@
 			<u-form-item label="户籍详细地址" label-width="250" label-align="left" prop="domicileDetails">
 				<u-input v-model="form.domicileDetails" :border="border" placeholder="户籍详细地址(必填)"/>
 			</u-form-item>
-			<u-form-item label="问：你是不是人大代表 ？" prop="fireQuestion1" label-position="top">
-				<u-radio-group v-model="form.fireQuestion1" @change="radioGroupChange1">
-					<u-radio shape="circle" v-for="(item, index) in fireQuestion1List" :key="index" :name="item.name">{{ item.label }}</u-radio>
+			<u-form-item label="问：你是不是人大代表 ？" prop="isRepresent" label-position="top">
+				<u-radio-group v-model="form.isRepresent" @change="radioGroupChange1">
+					<u-radio shape="circle" v-for="(item, index) in isRepresentList" :key="index" :name="item.name">{{ item.label }}</u-radio>
 				</u-radio-group>
 			</u-form-item>
-			<u-form-item label="问：请问你是否受到过行政处罚 ？" prop="fireQuestion2" label-position="top">
-				<u-radio-group v-model="form.fireQuestion2" @change="radioGroupChange2">
-					<u-radio shape="circle" v-for="(item, index) in fireQuestion2List" :key="index" :name="item.name">{{ item.label }}</u-radio>
+			<u-form-item label="问：请问你是否受到过行政处罚 ？" prop="isPunish" label-position="top">
+				<u-radio-group v-model="form.isPunish" @change="radioGroupChange2">
+					<u-radio shape="circle" v-for="(item, index) in isPunishList" :key="index" :name="item.name">{{ item.label }}</u-radio>
 				</u-radio-group>
 			</u-form-item>
 		</u-form>
@@ -123,7 +123,7 @@
 					'interviewee': '',
 					'sexValue': '',
 					'sex': '',
-					'age': null,
+					'age': '',
 					'birthday': '',
 					'cardId': '',
 					'currentAddress': '',
@@ -131,59 +131,59 @@
 					'phone': '',
 					'domicile': '',
 					'domicileDetails': '',
-					'fireQuestion1': null,
-					'fireQuestion2': null
+					'isRepresent': '',
+					'isPunish': ''
 				},
 				rules: {
-					// ask: [{required: true, message: '请输入问次', trigger: ['change','blur']}],
-					// startTime: [{required: true, message: '请选择询问时间', trigger: 'change'}],
-					// place: [{required: true, message: '请输入询问地点', trigger: ['change','blur']}],
-					// inquirer1: [{required: true, message: '请输入询问人', trigger: ['change','blur']}],
+					ask: [{required: true, message: '请输入问次', trigger: ['change','blur']}],
+					startTime: [{required: true, message: '请选择询问时间', trigger: 'change'}],
+					place: [{required: true, message: '请输入询问地点', trigger: ['change','blur']}],
+					inquirer1: [{required: true, message: '请输入询问人', trigger: ['change','blur']}],
 					inquirer1Unit: [{required: true, message: '请输入询问人工作单位', trigger: ['change','blur']}],
-					// recorder: [{required: true, message: '请输入记录人', trigger: ['change','blur']}],
-					// recorderUnit: [{required: true, message: '请输入记录人工作单位', trigger: ['change','blur']}],
-					// interviewee: [{required: true, message: '请输入被询问人', trigger: ['change','blur']}], 
-					// sex: [{required: true, message: '请选择性别', trigger: 'change'}],
-					// age: [{required: true, message: '请输入年龄', trigger: ['change','blur']}],
-					// birthday: [{required: true, message: '请选择出生日期', trigger: 'change'}],
-					// cardId: [
-					// 	{
-					// 		required: true,
-					// 		message: '请输入正确身份证号',
-					// 		trigger: ['change','blur'],
-					// 	},
-					// 	{
-					// 		validator: (rule, value, callback) => {
-					// 			// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
-					// 			return this.$u.test.idCard(value);
-					// 		},
-					// 		message: '身份证号不正确',
-					// 		// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-					// 		trigger: ['change']
-					// 	}
-					// ],
-					// currentAddress: [{required: true, message: '请选择现住址', trigger: 'change'}],
-					// currentAddressDetails: [{required: true, message: '请输入现住址详细地址', trigger: ['change','blur']}],
-					// phone: [
-					// 	{
-					// 		required: true,
-					// 		message: '请输入手机号',
-					// 		trigger: ['change','blur'],
-					// 	},
-					// 	{
-					// 		validator: (rule, value, callback) => {
-					// 			// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
-					// 			return this.$u.test.mobile(value);
-					// 		},
-					// 		message: '手机号码不正确',
-					// 		// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-					// 		trigger: ['change','blur']
-					// 	}
-					// ],
-					// domicile: [{required: true, message: '请选择户籍所在地', trigger: 'change'}],
-					// domicileDetails: [{required: true, message: '请输入户籍所在地详细地址', trigger: ['change','blur']}],
-					// fireQuestion1: [{required: true, message: '请输入答案一', trigger: 'change'}],
-					// fireQuestion2: [{required: true, message: '请输入答案二', trigger: ['change','blur']}]
+					recorder: [{required: true, message: '请输入记录人', trigger: ['change','blur']}],
+					recorderUnit: [{required: true, message: '请输入记录人工作单位', trigger: ['change','blur']}],
+					interviewee: [{required: true, message: '请输入被询问人', trigger: ['change','blur']}], 
+					sex: [{required: true, message: '请选择性别', trigger: 'change'}],
+					age: [{required: true, message: '请输入年龄', trigger: ['change','blur']}],
+					birthday: [{required: true, message: '请选择出生日期', trigger: 'change'}],
+					cardId: [
+						{
+							required: true,
+							message: '请输入正确身份证号',
+							trigger: ['change','blur'],
+						},
+						{
+							validator: (rule, value, callback) => {
+								// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
+								return this.$u.test.idCard(value);
+							},
+							message: '身份证号不正确',
+							// 触发器可以同时用blur和change，二者之间用英文逗号隔开
+							trigger: ['change']
+						}
+					],
+					currentAddress: [{required: true, message: '请选择现住址', trigger: 'change'}],
+					currentAddressDetails: [{required: true, message: '请输入现住址详细地址', trigger: ['change','blur']}],
+					phone: [
+						{
+							required: true,
+							message: '请输入手机号',
+							trigger: ['change','blur'],
+						},
+						{
+							validator: (rule, value, callback) => {
+								// 调用uView自带的js验证规则，详见：https://www.uviewui.com/js/test.html
+								return this.$u.test.mobile(value);
+							},
+							message: '手机号码不正确',
+							// 触发器可以同时用blur和change，二者之间用英文逗号隔开
+							trigger: ['change','blur']
+						}
+					],
+					domicile: [{required: true, message: '请选择户籍所在地', trigger: 'change'}],
+					domicileDetails: [{required: true, message: '请输入户籍所在地详细地址', trigger: ['change','blur']}],
+					isRepresent: [{required: true, message: '请输入答案一', trigger: 'change'}],
+					isPunish: [{required: true, message: '请输入答案二', trigger: ['change','blur']}]
 				},
 				actionSheetList: [
 					{
@@ -195,23 +195,23 @@
 						value: 1
 					}
 				],
-				fireQuestion1List: [
+				isRepresentList: [
 					{
-						name: 1,
+						name: '0',
 						label: '是'
 					},
 					{
-						name: 0,
+						name: '1',
 						label: '否'
 					}
 				],
-				fireQuestion2List: [
+				isPunishList: [
 					{
-						name: 1,
+						name: '0',
 						label: '是'
 					},
 					{
-						name: 0,
+						name: '1',
 						label: '否'
 					}
 				]
@@ -221,7 +221,6 @@
 			uni.getStorage({
 				key: 'fire',
 				success: (res) => {
-					console.log(res)
 					this.fireName = res.data.fireName
 				}
 			})
@@ -251,41 +250,33 @@
 			},
 			// 现住址回调
 			currentAddressConfirm(e) {
-				console.log(e)
 				this.form.currentAddress = e.province.label + e.city.label + e.area.label
 			},
 			// 户籍所在地回调
 			domicileConfirm(e) {
-				console.log(e)
 				this.form.domicile = e.province.label + e.city.label + e.area.label
 			},
 			radioGroupChange1(e) {
-				console.log(e)
-				this.form.fireQuestion1 = e
+				this.form.isRepresent = e
 			},
 			radioGroupChange2(e) {
-				console.log(e)
-				this.form.fireQuestion2 = e
+				this.form.isPunish = e
 			},
 			submit() {
-				console.log('fdsafds')
 				this.$refs.uForm.validate(valid => {
-					console.log(valid)
 					if (valid) {
-						console.log(valid)
 						uni.getStorage({
 							key: "fire",
 							success: (res) => {
-								console.log("fireId" + res.data)
 								this.form.handle = 'post'
-								this.form.fireId = res.data
+								this.form.fireId = res.data._id
+								this.form.fireName = res.data.fireName
 								
 								uni.setStorage({
 									key: 'company',
 									data: this.form.inquirer1Unit
 								})
 								
-								console.log(this.form)
 								uni.setStorage({
 									key: 'record',
 									data: this.form
@@ -294,27 +285,6 @@
 								uni.navigateTo({
 									url: './questionOne/index'
 								})
-								
-								// uniCloud.callFunction({
-								// 	name: 'record',
-								// 	data: this.form
-								// }).then((r) => {
-								// 	console.log(r)
-								// 	uni.setStorage({
-								// 		key: "recordId",
-								// 		data: r.result.id
-								// 	})
-									
-								// 	uni.setStorage({
-								// 		key: 'company',
-								// 		data: this.form.inquirer1Unit
-								// 	})
-									
-									
-								// 	uni.navigateTo({
-								// 		url: './questionOne/index'
-								// 	})
-								// })
 							}
 						})
 					}

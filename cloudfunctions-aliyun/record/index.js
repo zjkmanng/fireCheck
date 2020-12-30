@@ -3,7 +3,9 @@ const db = uniCloud.database()
 exports.main = async (event, context) => {
 	const collection = db.collection('record')
 	if (event.handle === 'get') {
-		const res = await collection.get()
+		const res = await collection.where({
+			fireId: event.fireId
+		}).get()
 		return res
 	} else if (event.handle === 'post') {
 		const res = await collection.add(event)

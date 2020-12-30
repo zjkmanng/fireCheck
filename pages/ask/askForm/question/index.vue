@@ -78,11 +78,14 @@
 		<view v-if="showPrevBtn === true" class="btn">
 			<u-button type="primary" size="medium" @click="next">下一问</u-button>
 		</view>
-		<view class="btn">
+		<view v-if="showPrevQuestion === true" class="btn">
+			<u-button type="primary" size="medium" @click="add">继续添加问题</u-button>
+		</view>
+		<view v-else class="btn">
 			<u-button type="primary" size="medium" @click="save">保存此问，添加下一问</u-button>
 		</view>
 		<view v-if="showPrevBtn === true" class="btn">
-			<u-button type="primary" size="medium" @click="createRecord">生成询问笔录</u-button>
+			<u-button type="primary" size="medium" @click="createRecord">下一步</u-button>
 		</view>
 		<!-- <view class="home" @click="home">
 			首页
@@ -786,6 +789,11 @@
 					})
 				}
 			},
+			add() {
+				this.showPrevQuestion = false
+				this.reset()
+				this.form.answer = ''
+			},
 			save() {
 				if (this.form.ask === '' && this.questionPicList.length === 0) {
 					uni.showToast({
@@ -856,15 +864,15 @@
 				}
 			},
 			createRecord() {
-				console.log(this.submitData)
-				// uni.getStorage({
-				// 	key: "recordId",
-				// 	success: (res) => {
-				// 		console.log(res.data)
-				// 		console.log(this.submitData)
-				// 		this.reset()
-				// 	}
-				// })
+				this.submitData.saveQuestionList = this.saveQuestionList
+				uni.setStorage({
+					key: 'record',
+					data: this.submitData
+				})
+				
+				uni.navigateTo({
+					url: '../questionLast/index'
+				})
 			},
 			reset() {
 				this.form.ask = '',

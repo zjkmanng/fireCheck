@@ -4,15 +4,15 @@
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "首页"
-			}
-		},
-		{
 			"path": "pages/login/index",
 			"style": {
 				"navigationBarTitleText": "登录"
+			}
+		},
+		{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": "首页"
 			}
 		},
 		{
@@ -64,6 +64,24 @@
 			}
 		},
 		{
+			"path": "pages/ask/record/index",
+			"style": {
+				"navigationBarTitleText": "询问笔录目录"
+			}
+		},
+		{
+			"path": "pages/ask/done/index",
+			"style": {
+				"navigationBarTitleText": "已完成"
+			}
+		},
+		{
+			"path": "pages/ask/word/index",
+			"style": {
+				"navigationBarTitleText": "下载word文档"
+			}
+		},
+		{
 			"path": "pages/ask/askForm/question/index",
 			"style": {
 				"navigationBarTitleText": "问答"
@@ -83,7 +101,13 @@
 		{
 			"path": "pages/ask/askForm/questionOne/index",
 			"style": {
-				"navigationBarTitleText": "问答提纲"
+				"navigationBarTitleText": "问答"
+			}
+		},
+		{
+			"path": "pages/ask/askForm/questionLast/index",
+			"style": {
+				"navigationBarTitleText": "问答"
 			}
 		},
 		{

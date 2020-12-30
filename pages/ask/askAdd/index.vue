@@ -23,12 +23,17 @@
 								<u-loading size="100" mode="circle"></u-loading>
 							</view>
 							<view v-else class="add-list">
-								<view v-for="(item, index) in addlist" :key="index" class="add-list-item">
-									<view class="name" @click="details(item)">
-										{{ item.fireName }}
-									</view>
-									<view class="delete">
-										<u-button type="error" size="medium" @click="del(item)">删除</u-button>
+								<view v-if="addlist.length === 0" class="">
+									<u-empty text="无数据" mode="list"></u-empty>
+								</view>
+								<view v-else class="">
+									<view v-for="(item, index) in addlist" :key="index" class="add-list-item">
+										<view class="name" @click="details(item)">
+											{{ item.fireName }}
+										</view>
+										<view class="delete">
+											<u-button type="error" size="medium" @click="del(item)">删除</u-button>
+										</view>
 									</view>
 								</view>
 							</view>
@@ -37,15 +42,50 @@
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;">
-						<view class="">
+						<view class="page">
+							<u-search placeholder="搜索" v-model="keyword" @search="search" @custom="search"></u-search>
 							
+							<view v-if="loading === true" class="nolist">
+								<u-loading size="100" mode="circle"></u-loading>
+							</view>
+							
+							<view v-else class="add-list">
+								<view v-if="addlist.length === 0" class="">
+									<u-empty text="无数据" mode="list"></u-empty>
+								</view>
+								<view v-else class="">
+									<view v-for="(item, index) in addlist" :key="index" class="add-list-item">
+										<view class="name" @click="record(item)">
+											{{ item.fireName }}
+										</view>
+									</view>
+								</view>
+							</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
 				<swiper-item class="swiper-item">
 					<scroll-view scroll-y style="height: 100%;width: 100%;">
-						<view class="">
-							一万
+						<view class="page">
+							<view v-if="loading === true" class="nolist">
+								<u-loading size="100" mode="circle"></u-loading>
+							</view>
+							
+							<view v-else class="add-list">
+								<view v-if="addlist.length === 0" class="">
+									<u-empty text="无数据" mode="list"></u-empty>
+								</view>
+								<view v-else class="">
+									<view v-for="(item, index) in addlist" :key="index" class="add-list-item">
+										<view class="name" @click="done(item)">
+											{{ item.fireName }}
+										</view>
+										<view class="delete">
+											<u-button type="error" size="medium" @click="del(item)">删除</u-button>
+										</view>
+									</view>
+								</view>
+							</view>
 						</view>
 					</scroll-view>
 				</swiper-item>
@@ -77,34 +117,49 @@
 				swiperCurrent: 0,
 				fireName: '',
 				addlist: [],
+				todoList: [],
+				keyword: '',
 				loading: false
 			}
 		},
-		onLoad() {
+		onLoad(option) {
+			const data = option.data
+			const status = JSON.parse(data)
+			this.current = status.status
+			this.swiperCurrent = this.current
+			
 			uni.getStorage({
 				key: 'userId',
 				success: (res) => {
 					this.userId = res.data
-					this.getList(this.userId)
+					const status = 0
+					this.getList(this.userId, status)
 				}
 			})
 		},
 		methods: {
-			getList(userId) {
+			getList(userId, status) {
 				this.loading = true
 				uniCloud.callFunction({
 					name: 'fire',
 					data: {
 						"handle": "get",
-						"userId": userId
+						"userId": userId,
+						"status": status
 					}
 				}).then((res) => {
+					console.log(res)
 					this.loading = false
 					this.addlist = res.result.data
 				})
 			},
 			change(index) {
 				this.swiperCurrent = index
+				if (index === 0 || index === 1) {
+					this.getList(this.userId, 0)
+				} else {
+					this.getList(this.userId, 1)
+				}
 			},
 			transition({ detail: { dx } }) {
 				this.$refs.tabs.setDx(dx);
@@ -126,7 +181,7 @@
 				}).then((res) => {
 					this.$u.toast('添加成功')
 					this.fireName = ''
-					this.getList()
+					this.getList(this.userId, 0)
 				})
 			},
 			del(item) {
@@ -138,7 +193,7 @@
 					}
 				}).then((res) => {
 					this.$u.toast('删除成功')
-					this.getList()
+					this.getList(this.userId, 0)
 				})
 			},
 			details(item) {
@@ -148,6 +203,29 @@
 				})
 				uni.navigateTo({
 					url: '/pages/ask/askFireDetails/index?item=' + JSON.stringify(item)
+				})
+			},
+			search(e) {
+				console.log(e)
+				this.loading = true
+				
+				uniCloud.callFunction({
+					name: 'record',
+					data: {
+						"handle": "get"
+					}
+				}).then((res) => {
+					this.loading = false
+				})
+			},
+			record(item) {
+				uni.navigateTo({
+					url: '../record/index?data=' + JSON.stringify(item)
+				})
+			},
+			done(item) {
+				uni.navigateTo({
+					url: '../done/index?data=' + JSON.stringify(item)
 				})
 			},
 			home() {

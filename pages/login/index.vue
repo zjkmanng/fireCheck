@@ -53,6 +53,9 @@
 		},
 		methods: {
 			submit() {
+				uni.showLoading({
+					title: '登录中...'
+				})
 				this.$refs.uForm.validate(valid => {
 					if (valid) {
 						uniCloud.callFunction({

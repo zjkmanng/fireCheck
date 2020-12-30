@@ -24,7 +24,13 @@
 		},
 		methods: {
 			make() {
-				this.$u.route('/pages/ask/askAdd/index')
+				// this.$u.route('/pages/ask/askAdd/index')
+				var data = {
+					status: 0
+				}
+				uni.navigateTo({
+					url: 'askAdd/index?data=' + JSON.stringify(data)
+				})
 			},
 			study() {
 				this.$u.route('/pages/ask/study/index')
