@@ -41,7 +41,7 @@
 				<u-input :border="border" type="select" :select-open="birthdayShow" v-model="form.birthday" placeholder="出生日期(必填)" @click="birthdayShow = true"></u-input>
 			</u-form-item>
 			<u-form-item label="身份证号" label-width="250" label-align="left" prop="cardId">
-				<u-input v-model="form.cardId" :border="border" placeholder="身份证号(必填)" @click="cardIdShow = true"/>
+				<u-input v-model="form.cardId" :border="border" placeholder="身份证号(必填)" @click="changeCardId"/>
 			</u-form-item>
 			
 			<u-form-item label="现住址" label-width="250" label-align="left" prop="currentAddress">
@@ -159,7 +159,7 @@
 							},
 							message: '身份证号不正确',
 							// 触发器可以同时用blur和change，二者之间用英文逗号隔开
-							trigger: ['change']
+							trigger: ['change', 'blur']
 						}
 					],
 					currentAddress: [{required: true, message: '请选择现住址', trigger: 'change'}],
@@ -229,6 +229,10 @@
 			this.$refs.uForm.setRules(this.rules)
 		},
 		methods: {
+			changeCardId() {
+				uni.hideKeyboard()
+				this.cardIdShow = true
+			},
 			startTimeConfirm(e) {
 				this.form.startTime = e.year + '年' + e.month + '月' + e.day + '日' + e.hour + '时' + e.minute + '分'
 			},

@@ -716,7 +716,6 @@
 				})
 			},
 			confirm(e) {
-				console.log(e)
 				this.form.question = e[0].label
 				this.details = e[0].value
 				this.questionDiyList = e[0].extra
@@ -747,33 +746,23 @@
 				this.form.ask = ''
 			},
 			beforePicChange(lists, name) {
-				this.questionPicList = lists
-				const url = lists[0].url
-				uni.request({
-				    url: url,
-				    method:'GET',
-				    responseType:'arraybuffer',
-				    success: ress => {
-				        let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64
-				        this.form.beforePic = 'data:image/jpeg;base64,' + base64 //不加上这串字符，在页面无法显示的哦
-					},fail: (e) => {
-				        console.log("图片转换失败");
-					}
+				let filePath = lists[0].url
+				const result = uniCloud.uploadFile({
+					filePath: filePath,
+					cloudPath: String(Math.random()*5).split('.')[1] + '.png',
+				})
+				result.then(res => {
+					this.form.beforePic = res.fileID
 				})
 			},
 			afterPicChange(lists, name) {
-				this.answerPicList = lists
-				const url = lists[0].url
-				uni.request({
-				    url: url,
-				    method:'GET',
-				    responseType:'arraybuffer',
-				    success: ress => {
-				        let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64
-				        this.form.afterPic = 'data:image/jpeg;base64,' + base64 //不加上这串字符，在页面无法显示的哦
-					},fail: (e) => {
-				        console.log("图片转换失败");
-					}
+				let filePath = lists[0].url
+				const result = uniCloud.uploadFile({
+					filePath: filePath,
+					cloudPath: String(Math.random()*5).split('.')[1] + '.png',
+				})
+				result.then(res => {
+					this.form.afterPic = res.fileID
 				})
 			},
 			see() {
@@ -816,9 +805,7 @@
 					ask: this.form.ask,
 					answer: this.form.answer,
 					beforePic: this.form.beforePic,
-					questionPicList: this.questionPicList,
-					afterPic: this.form.afterPic,
-					answerPicList: this.answerPicList
+					afterPic: this.form.afterPic
 				})
 				this.showPrevBtn = true
 				this.activeIndex = this.activeIndex +1

@@ -5,7 +5,7 @@
 			<span>{{ data.ask }}word</span>
 		</view>
 		<view class="link">
-			<u-link href="http://static-178ac6c4-e55b-47ea-823a-47758d3121d9.bspapp.com/#/pages/ask/askAdd/index">下载word</u-link>
+			<u-link :href="'https://static-178ac6c4-e55b-47ea-823a-47758d3121d9.bspapp.com?data=' + JSON.stringify(data)">下载word</u-link>
 		</view>
 	</view>
 </template>

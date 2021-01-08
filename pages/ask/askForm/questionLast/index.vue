@@ -59,16 +59,24 @@
 				this.form.answer03 = e.year + '年' + e.month + '月' + e.day + '日'
 			},
 			submit() {
+				
 				this.$refs.uForm.validate(valid => {
 					if (valid) {
 						
 						this.submitData.questionLast = this.form
 						console.log(this.submitData)
 						
+						uni.showLoading({
+							title: '生成中...'
+						})
+						
 						uniCloud.callFunction({
 							name: 'record',
 							data: this.submitData
 						}).then((r) => {
+							
+							uni.hideLoading()
+							
 							var data = {
 								status: 1
 							}
