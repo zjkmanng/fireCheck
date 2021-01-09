@@ -745,6 +745,36 @@
 			deleteAsk() {
 				this.form.ask = ''
 			},
+			// beforePicChange(lists, name) {
+			// 	this.questionPicList = lists
+			// 	const url = lists[0].url
+			// 	uni.request({
+			// 	    url: url,
+			// 	    method:'GET',
+			// 	    responseType:'arraybuffer',
+			// 	    success: ress => {
+			// 	        let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64
+			// 	        this.form.beforePic = 'data:image/jpeg;base64,' + base64 //不加上这串字符，在页面无法显示的哦
+			// 		},fail: (e) => {
+			// 	        console.log("图片转换失败");
+			// 		}
+			// 	})
+			// },
+			// afterPicChange(lists, name) {
+			// 	this.answerPicList = lists
+			// 	const url = lists[0].url
+			// 	uni.request({
+			// 	    url: url,
+			// 	    method:'GET',
+			// 	    responseType:'arraybuffer',
+			// 	    success: ress => {
+			// 	        let base64 = wx.arrayBufferToBase64(ress.data); //把arraybuffer转成base64
+			// 	        this.form.afterPic = 'data:image/jpeg;base64,' + base64 //不加上这串字符，在页面无法显示的哦
+			// 		},fail: (e) => {
+			// 	        console.log("图片转换失败");
+			// 		}
+			// 	})
+			// },
 			beforePicChange(lists, name) {
 				let filePath = lists[0].url
 				const result = uniCloud.uploadFile({

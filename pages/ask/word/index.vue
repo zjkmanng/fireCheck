@@ -5,7 +5,7 @@
 			<span>{{ data.ask }}word</span>
 		</view>
 		<view class="link">
-			<u-link :href="'https://static-178ac6c4-e55b-47ea-823a-47758d3121d9.bspapp.com?data=' + JSON.stringify(data)">下载word</u-link>
+			<u-link :href="'https://static-178ac6c4-e55b-47ea-823a-47758d3121d9.bspapp.com?data=' + id">下载word</u-link>
 		</view>
 	</view>
 </template>
@@ -14,14 +14,16 @@
 	export default {
 		data() {
 			return {
-				data: {}
+				data: {},
+				id: ''
 			}
 		},
 		onLoad(option) {
 			var d = option.data
 			var data = JSON.parse(d)
-			console.log(data)
+			console.log('data', data._id)
 			this.data = data
+			this.id = data._id
 		}
 	}
 </script>
