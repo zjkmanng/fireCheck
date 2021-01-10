@@ -2,7 +2,7 @@
 	<view class="content">
 		<view class="name">
 			<view @click="specific">具体要求</view>
-			<view @click="commonly">一般要求.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/6f19e2a0-5318-11eb-8ff1-d5dcf8779628.doc')">一般要求.docx</view>
 		</view>
 		<view class="home" @click="home">
 			首页
@@ -11,8 +11,24 @@
 </template>
 
 <script>
+	const tbs = uni.requireNativePlugin('FUN-TBS');
+	var _this;
 	export default {
+		data() {
+			return {
+				title: 'Hello'
+			};
+		},
+		onLoad() {
+			_this = this;
+		},
 		methods: {
+			openTbs: function(path) {
+				tbs.open({ folder: 'abb', url: path, topBarColor: '#FFFFFF', title: '文件查看', titleColor: '#000000' }, result => {
+					console.log('-----TBS------ ' + JSON.stringify(result));
+					
+				});
+			},
 			home() {
 				uni.switchTab({
 					url: '../../index/index'
@@ -22,15 +38,9 @@
 				uni.navigateTo({
 					url: './specific'
 				})
-			},
-			commonly() {
-				console.log("一般");
-			},
-			details() {
-				const openfile = uni.requireNativePlugin("aq-fileviewer");
-			},
+			}
 		}
-	}
+	};
 </script>
 
 <style lang="scss" scoped>

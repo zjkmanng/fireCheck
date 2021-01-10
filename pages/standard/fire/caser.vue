@@ -1,9 +1,9 @@
 <template>
 	<view class="content">
 		<view class="name">
-			<view @click="notice">案件移送材料.docx</view>
-			<view @click="closer">需要移送的案件.docx</view>
-			<view @click="detailed">移送案件的反馈.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/79c1f250-531e-11eb-a16f-5b3e54966275.docx')">1.案件移送材料.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/7a859070-531e-11eb-a16f-5b3e54966275.docx')">2.需要移送的案件.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/7b281200-531e-11eb-97b7-0dc4655d6e68.docx')">3.移送案件的反馈.docx</view>
 		</view>
 		<view class="home" @click="home">
 			首页
@@ -12,27 +12,31 @@
 </template>
 
 <script>
+	const tbs = uni.requireNativePlugin('FUN-TBS');
+	var _this;
 	export default {
+		data() {
+			return {
+				title: 'Hello'
+			};
+		},
+		onLoad() {
+			_this = this;
+		},
 		methods: {
+			openTbs: function(path) {
+				tbs.open({ folder: 'abb', url: path, topBarColor: '#ffffff', title: '文件查看', titleColor: '#000000' }, result => {
+					console.log('-----TBS------ ' + JSON.stringify(result));
+					
+				});
+			},
 			home() {
 				uni.switchTab({
 					url: '../../index/index'
 				})
-			},
-			notice() {
-				
-			},
-			closer() {
-				
-			},
-			detailed () {
-				
-			},
-			details() {
-				const openfile = uni.requireNativePlugin("aq-fileviewer");
-			},
+			}
 		}
-	}
+	};
 </script>
 
 <style lang="scss" scoped>

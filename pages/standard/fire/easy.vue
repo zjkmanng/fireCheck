@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
 		<view class="name">
-			<view @click="notice">简易程序的实施程序.docx</view>
-			<view @click="closer">简易程序的适用范围.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/52a26c80-531f-11eb-8ff1-d5dcf8779628.docx')">1.简易程序的实施程序.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/534f2740-531f-11eb-a16f-5b3e54966275.docx')">2.简易程序的适用范围.docx</view>
 		</view>
 		<view class="home" @click="home">
 			首页
@@ -11,24 +11,31 @@
 </template>
 
 <script>
-	export default {
-		methods: {
-			home() {
-				uni.switchTab({
-					url: '../../index/index'
-				})
+	const tbs = uni.requireNativePlugin('FUN-TBS');
+		var _this;
+		export default {
+			data() {
+				return {
+					title: 'Hello'
+				};
 			},
-			notice() {
-				
+			onLoad() {
+				_this = this;
 			},
-			closer() {
-				
-			},
-			details() {
-				const openfile = uni.requireNativePlugin("aq-fileviewer");
-			},
-		}
-	}
+			methods: {
+				openTbs: function(path) {
+					tbs.open({ folder: 'abb', url: path, topBarColor: '#ffffff', title: '文件查看', titleColor: '#000000' }, result => {
+						console.log('-----TBS------ ' + JSON.stringify(result));
+						
+					});
+				},
+				home() {
+					uni.switchTab({
+						url: '../../index/index'
+					})
+				}
+			}
+		};
 </script>
 
 <style lang="scss" scoped>

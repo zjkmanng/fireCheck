@@ -23,7 +23,7 @@
 				<u-button type="primary" @click="commonly">一般程序</u-button>
 			</view>
 			<view class="statistics">
-				<u-button type="primary" @click="statistics">火灾损失统计.docx</u-button>
+				<u-button type="primary" @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/6f00e2c0-5320-11eb-bdc1-8bd33eb6adaa.docx')">火灾损失统计.docx</u-button>
 			</view>
 		</view>
 		
@@ -34,53 +34,66 @@
 </template>
 
 <script>
-	export default {
-		methods: {
-			home() {
-				uni.switchTab({
-					url: '../../index/index'
-				})
+	const tbs = uni.requireNativePlugin('FUN-TBS');
+		var _this;
+		export default {
+			data() {
+				return {
+					title: 'Hello'
+				};
 			},
-			caser() {
-				uni.navigateTo({
-					url: './caser'
-				})
+			onLoad() {
+				_this = this;
 			},
-			reviewse() {
-				uni.navigateTo({
-					url: './reviewse'
-				})
-			},
-			have() {
-				uni.navigateTo({
-					url: './have'
-				})
-			},
-			appraisal() {
-				uni.navigateTo({
-					url: './appraisal'
-				})
-			},
-			accident() {
-				uni.navigateTo({
-					url: './accident'
-				})
-			},
-			easy() {
-				uni.navigateTo({
-					url: './easy'
-				})
-			},
-			commonly() {
-				uni.navigateTo({
-					url: './commonly'
-				})
-			},
-			statistics() {
-				
+			methods: {
+				openTbs: function(path) {
+					tbs.open({ folder: 'abb', url: path, topBarColor: '#ffffff', title: '文件查看', titleColor: '#000000' }, result => {
+						console.log('-----TBS------ ' + JSON.stringify(result));
+						
+					});
+				},
+				home() {
+					uni.switchTab({
+						url: '../../index/index'
+					})
+				},
+				caser() {
+					uni.navigateTo({
+						url: './caser'
+					})
+				},
+				reviewse() {
+					uni.navigateTo({
+						url: './reviewse'
+					})
+				},
+				have() {
+					uni.navigateTo({
+						url: './have'
+					})
+				},
+				appraisal() {
+					uni.navigateTo({
+						url: './appraisal'
+					})
+				},
+				accident() {
+					uni.navigateTo({
+						url: './accident'
+					})
+				},
+				easy() {
+					uni.navigateTo({
+						url: './easy'
+					})
+				},
+				commonly() {
+					uni.navigateTo({
+						url: './commonly'
+					})
+				},
 			}
-		}
-	}
+		};
 </script>
 
 <style lang="scss" scoped>

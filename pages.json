@@ -3,91 +3,78 @@
 		"^u-(.*)": "@/uview-ui/components/u-$1/u-$1.vue"
 	},
 	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
-		{
-			"path": "pages/login/index",
-			"style": {
-				"navigationBarTitleText": "登录"
-			}
-		},
+		
 		{
 			"path": "pages/index/index",
 			"style": {
 				"navigationBarTitleText": "首页"
 			}
-		},
-		{
+		},{
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "登录"
+			}
+		},{
 			"path": "pages/ask/index",
 			"style": {
 				"navigationBarTitleText": "询问"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askAdd/index",
 			"style": {
 				"navigationBarTitleText": "询问"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askFireDetails/index",
 			"style": {
 				"navigationBarTitleText": "询问要求"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askSelect/index",
 			"style": {
 				"navigationBarTitleText": "询问人员性质"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askSelect/details",
 			"style": {
 				"navigationBarTitleText": "询问人员性质详情"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askType/index",
 			"style": {
 				"navigationBarTitleText": "询问类型"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askType/details",
 			"style": {
 				"navigationBarTitleText": "询问类型详情"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askForm/index",
 			"style": {
 				"navigationBarTitleText": "询问笔录"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/record/index",
 			"style": {
 				"navigationBarTitleText": "询问笔录目录"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/done/index",
 			"style": {
 				"navigationBarTitleText": "已完成"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/word/index",
 			"style": {
 				"navigationBarTitleText": "下载word文档"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askForm/question/index",
 			"style": {
 				"navigationBarTitleText": "问答"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askForm/question/details",
 			"style": {
 				"navigationBarTitleText": "问答提纲",
@@ -97,41 +84,165 @@
 					}
 				}
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askForm/questionOne/index",
 			"style": {
 				"navigationBarTitleText": "问答"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/askForm/questionLast/index",
 			"style": {
 				"navigationBarTitleText": "问答"
 			}
-		},
-		{
+		},{
 			"path": "pages/photo/index",
 			"style": {
 				"navigationBarTitleText": "照相"
 			}
-		},
-		{
+		},{
 			"path": "pages/loss/index",
 			"style": {
 				"navigationBarTitleText": "计损"
 			}
-		},
-		{
+		},{
 			"path": "pages/editpassword/index",
 			"style": {
 				"navigationBarTitleText": "修改密码"
 			}
-		},
-		{
+		},{
 			"path": "pages/ask/study/index",
 			"style": {
 				"navigationBarTitleText": "学习"
+			}
+		},{
+			"path": "pages/ask/study/verification",
+			"style": {
+				"navigationBarTitleText": "言辞证据的审查验证"
+			}
+		},{
+			"path": "pages/ask/study/skill",
+			"style": {
+				"navigationBarTitleText": "火灾调查询问笔录的技巧"
+			}
+		},{
+			"path": "pages/photo/photo",
+			"style": {
+				"navigationBarTitleText": "火灾调查询问笔录的技巧"
+			}
+		},{
+			"path": "pages/photo/method",
+			"style": {
+				"navigationBarTitleText": "火场照相方法"
+			}
+		},{
+			"path": "pages/standard/index",
+			"style": {
+				"navigationBarTitleText": "规范/规则"
+			}
+		},{
+			"path": "pages/standard/method/inquest",
+			"style": {
+				"navigationBarTitleText": "火灾技术鉴定物证提取方法"
+			}
+		},{
+			"path": "pages/standard/explain/cognizance",
+			"style": {
+				"navigationBarTitleText": "火事故调查法律文书制作与使用说明"
+			}
+		},{
+			"path": "pages/standard/fire/regulations",
+			"style": {
+				"navigationBarTitleText": "火灾事故调查规定"
+			}
+		},{
+			"path": "pages/standard/rules/rule",
+			"style": {
+				"navigationBarTitleText": "火灾现场勘验规则"
+			}
+		},{
+			"path": "pages/standard/reasons/reason",
+			"style": {
+				"navigationBarTitleText": "火灾原因认定暂行规则"
+			}
+		},{
+			"path": "pages/standard/explain/specific",
+			"style": {
+				"navigationBarTitleText": "具体要求"
+			}
+		},{
+			"path": "pages/date/index",
+			"style": {
+				"navigationBarTitleText": "数据库"
+			}
+		},{
+			"path": "pages/standard/fire/caser",
+			"style": {
+				"navigationBarTitleText": "案件处理"
+			}
+		},{
+			"path": "pages/standard/fire/reviewse",
+			"style": {
+				"navigationBarTitleText": "复核"
+			}
+		},{
+			"path": "pages/standard/fire/have",
+			"style": {
+				"navigationBarTitleText": "管辖"
+			}
+		},{
+			"path": "pages/standard/fire/accident",
+			"style": {
+				"navigationBarTitleText": "火灾事故认定"
+			}
+		},{
+			"path": "pages/standard/fire/appraisal",
+			"style": {
+				"navigationBarTitleText": "检验、鉴定"
+			}
+		},{
+			"path": "pages/standard/fire/easy",
+			"style": {
+				"navigationBarTitleText": "简易程序"
+			}
+		},{
+			"path": "pages/standard/fire/commonly",
+			"style": {
+				"navigationBarTitleText": "一般程序"
+			}
+		},{
+			"path": "pages/standard/reasons/requirement",
+			"style": {
+				"navigationBarTitleText": "火灾原因认定的一般要求"
+			}
+		},{
+			"path": "pages/standard/reasons/examination",
+			"style": {
+				"navigationBarTitleText": "火灾证据与证据审查"
+			}
+		},{
+			"path": "pages/standard/reasons/cognizance",
+			"style": {
+				"navigationBarTitleText": "起火部位或者起火点认定"
+			}
+		},{
+			"path": "pages/standard/reasons/timese",
+			"style": {
+				"navigationBarTitleText": "起火时间认定"
+			}
+		},{
+			"path": "pages/standard/reasons/appraisal",
+			"style": {
+				"navigationBarTitleText": "起火原因认定"
+			}
+		},{
+			"path": "pages/standard/reasons/disaster",
+			"style": {
+				"navigationBarTitleText": "灾害成因认定"
+			}
+		},{
+			"path": "pages/date/index",
+			"style": {
+				"navigationBarTitleText": "数据库"
 			}
 		}
 	],

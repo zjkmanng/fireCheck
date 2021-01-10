@@ -12,21 +12,17 @@
 				<u-icon name="camera" :size="46"></u-icon>
 				<view class="grid-text">照相</view>
 			</u-grid-item>
+			<u-grid-item @click="standard">
+				<u-icon name="grid" :size="46"></u-icon>
+				<view class="grid-text">规范</view>
+			</u-grid-item>
+			<u-grid-item @click="calendar">
+				<u-icon name="calendar" :size="46"></u-icon>
+				<view class="grid-text">数据库</view>
+			</u-grid-item>
 			<u-grid-item @click="order">
 				<u-icon name="order" :size="46"></u-icon>
 				<view class="grid-text">计损</view>
-			</u-grid-item>
-			<u-grid-item>
-				<u-icon name="photo" :size="46"></u-icon>
-				<view class="grid-text">图片</view>
-			</u-grid-item>
-			<u-grid-item>
-				<u-icon name="lock" :size="46"></u-icon>
-				<view class="grid-text">锁头</view>
-			</u-grid-item>
-			<u-grid-item>
-				<u-icon name="hourglass" :size="46"></u-icon>
-				<view class="grid-text">沙漏</view>
 			</u-grid-item>
 			<u-grid-item @click="editPwd">
 				<u-icon name="hourglass" :size="46"></u-icon>
@@ -56,6 +52,9 @@
 			})
 		},
 		methods: {
+			camera() {
+				this.$u.route('/pages/photo/index')
+			},
 			question() {
 				this.$u.route('/pages/ask/index')
 			},
@@ -65,12 +64,15 @@
 			loginOut() {
 				this.$u.route('/pages/login/index')
 			},
-			camera() {
-				this.$u.route('/pages/photo/index')
-			},
 			order() {
 				this.$u.route('/pages/loss/index')
-			}
+			},
+			calendar() {
+				this.$u.route('/pages/date/index')
+			},
+			standard() {
+				this.$u.route('/pages/standard/index')
+			},
 		}
 	}
 </script>

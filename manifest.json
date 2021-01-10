@@ -1,5 +1,5 @@
 {
-    "name" : "app2",
+    "name" : "火灾",
     "appid" : "__UNI__8540287",
     "description" : "",
     "versionName" : "1.0.0",
@@ -52,6 +52,22 @@
             /* SDK配置 */
             "sdkConfigs" : {
                 "ad" : {}
+            }
+        },
+        "nativePlugins" : {
+            "FUN-TBS" : {
+                "__plugin_info__" : {
+                    "name" : "office文档预览 特别版",
+                    "description" : "基于TBS封装office文档预览",
+                    "platforms" : "Android",
+                    "url" : "https://ext.dcloud.net.cn/plugin?id=3423",
+                    "android_package_name" : "uni.UNI8540287",
+                    "ios_bundle_id" : "",
+                    "isCloud" : true,
+                    "bought" : 1,
+                    "pid" : "3423",
+                    "parameters" : {}
+                }
             }
         }
     },

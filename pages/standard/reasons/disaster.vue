@@ -1,9 +1,9 @@
 <template>
 	<view class="content">
 		<view class="name">
-			<view @click="notice">认定灾害成因的一般规定.docx</view>
-			<view @click="closer">认定灾害成因的作用.docx</view>
-			<view @click="detailed">认定灾祸成因的分析依据.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/e6e1e710-5322-11eb-b997-9918a5dda011.doc')">1.认定灾害成因的一般规定.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/e78bbba0-5322-11eb-b997-9918a5dda011.doc')">2.认定灾害成因的作用.docx</view>
+			<view @click="openTbs('https://vkceyugu.cdn.bspapp.com/VKCEYUGU-aliyun-rydglh0nt2kq2b05dd/e833e280-5322-11eb-a16f-5b3e54966275.doc')">3.认定灾祸成因的分析依据.docx</view>
 		</view>
 		
 		<view class="home">
@@ -13,24 +13,31 @@
 </template>
 
 <script>
+	const tbs = uni.requireNativePlugin('FUN-TBS');
+	var _this;
 	export default {
+		data() {
+			return {
+				title: 'Hello'
+			};
+		},
+		onLoad() {
+			_this = this;
+		},
 		methods: {
+			openTbs: function(path) {
+				tbs.open({ folder: 'abb', url: path, topBarColor: '#ffffff', title: '文件查看', titleColor: '#000000' }, result => {
+					console.log('-----TBS------ ' + JSON.stringify(result));
+					
+				});
+			},
 			home() {
 				uni.switchTab({
 					url: '../../index/index'
 				})
-			},
-			notice() {
-				
-			},
-			closer() {
-				
-			},
-			detailed () {
-				
-			},
+			}
 		}
-	}
+	};
 </script>
 
 <style lang="scss" scoped>
